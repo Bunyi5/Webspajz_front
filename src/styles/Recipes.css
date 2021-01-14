@@ -1,0 +1,27 @@
+.recipes-container {
+    margin-left: 15px;
+}
+
+.recipe-container {
+    position: relative;
+    float: left;
+    margin-right: 16px;
+    margin-bottom: 30px;
+    border: solid grey;
+    cursor: pointer;
+    width: 360px;
+    height: 288px;
+}
+
+.recipe-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: gray;
+    width: 355px;
+    height: 48px;
+}
+
+.recipe-container img {
+    width: 355px;
+}
