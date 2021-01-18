@@ -1,0 +1,64 @@
+.recipe-details {
+    position: relative;
+}
+
+.recipe-details img {
+    position: absolute;
+    left: 0;
+    border-bottom: solid gray 8px;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+#recipe-name {
+    position: absolute;
+    top: 205px;
+    left: 150px;
+}
+
+.review-container {
+    position: relative;
+    top: 205px;
+    right: 150px;
+    float: right;
+    overflow: hidden;
+    font-size: 23px;
+}
+
+.stars-outer {
+    display: inline-block;
+    position: relative;
+    right: 0px;
+    font-family: FontAwesome;
+}
+
+.stars-outer::before {
+    content: "\f006 \f006 \f006 \f006 \f006";
+}
+
+.stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.stars-inner::before {
+    color: #f8ce0b;
+    content: "\f005 \f005 \f005 \f005 \f005";
+}
+
+.total-review {
+    float: right;
+}
+
+.details-container {
+    position: relative;
+    top: 260px;
+    left: 150px;
+    margin-right: 300px;
+    text-align: left;
+}

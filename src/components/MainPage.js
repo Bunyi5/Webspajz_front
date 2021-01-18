@@ -1,5 +1,5 @@
 import React from 'react';
-import Toolbar from './toolbar/Toolbar'
+import Toolbar from './toolbar/Toolbar';
 import Recipes from './Recipes';
 
 export default class MainPage extends React.Component {

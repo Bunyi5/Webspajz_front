@@ -1,4 +1,5 @@
 import React from 'react';
+import history from '../history'
 
 import '../styles/Recipes.css'
 
@@ -33,7 +34,12 @@ export default class Recipes extends React.Component {
 
     render() {
         const recipes = this.state.presentedRecipes.map(recipes =>
-            <div className='recipe-container' key={'recipe' + recipes.id}>
+            <div className='recipe-container' key={'recipe' + recipes.id} onClick={() => history.push({
+                pathname: '/recipe/' + recipes.id,
+                state: {
+                    id: recipes.id
+                }
+            })}>
                 <img src={recipes.iconImageUrl} alt='' ></img>
                 <div className='recipe-name' >{recipes.name}</div>
             </div>
