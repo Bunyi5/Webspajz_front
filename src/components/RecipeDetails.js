@@ -13,26 +13,24 @@ export default class RecipeDetails extends React.Component {
 
     componentDidMount() {
         fetch('http://localhost:8080/recipe/' + this.props.location.state.id, {
-            method: 'GET'
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('authorization')
+            }
+        }).then(response => {
+            if (!response.ok) {
+                throw Error('Error fetching recipe details!')
+            }
+            return response.json()
+        }).then(responseData => {
+            this.setState({
+                recipe: responseData
+            })
+        }).then(() => {
+            this.setStarPercentage()
+        }).catch(err => {
+            console.log(err)
         })
-            .then(response => {
-                if (!response.ok) {
-                    throw Error('Error fetching profile picture!')
-                }
-                return response.json()
-            })
-            .then(responseData => {
-                this.setState({
-                    recipe: responseData
-                })
-                console.log(this.state.recipe)
-            })
-            .then(() => {
-                this.setStarPercentage()
-            })
-            .catch(err => {
-                console.log(err)
-            })
     }
 
     setStarPercentage() {
@@ -51,7 +49,7 @@ export default class RecipeDetails extends React.Component {
     }
 
     RecipeDetailList(props) {
-        if (props.content != null) {
+        if (props.content != null && props.content.length > 0) {
             const contentList = props.content.map(item =>
                 <li key={item}>{item}</li>
             );
@@ -65,18 +63,18 @@ export default class RecipeDetails extends React.Component {
 
 
     Ingredient(props) {
-        if (props.ingredients != null) {
-            const ingredientList = props.ingredients.map(item => {
+        if (props.ingredients != null && props.ingredients.length > 0) {
+            const recipeIngredientList = props.ingredients.map(item => {
                 if (item.quantity === 0) {
-                    return <li key={item.id}>{item.ingredient}</li>
+                    return <li key={item.id}>{item.ingredient.name}</li>
                 } else if (item.unit == null) {
-                    return <li key={item.id}>{item.ingredient + ' (' + item.quantity + ')'}</li>
+                    return <li key={item.id}>{item.ingredient.name + ' (' + item.quantity + ' db)'}</li>
                 } else {
-                    return <li key={item.id}>{item.ingredient + ' (' + item.quantity + ' ' + item.unit + ')'}</li>
+                    return <li key={item.id}>{item.ingredient.name + ' (' + item.quantity + ' ' + item.unit + ')'}</li>
                 }
             });
             return <div className='details-container'>
-                <b>Ingredients:</b> <ul>{ingredientList}</ul>
+                <b>Ingredients:</b> <ul>{recipeIngredientList}</ul>
             </div>
         } else {
             return null;
@@ -100,7 +98,7 @@ export default class RecipeDetails extends React.Component {
                 <this.RecipeDetailList name='Technique' content={this.state.recipe.techniqueList} />
                 <this.RecipeDetailList name='Nutrition' content={this.state.recipe.nutritionList} />
                 <this.RecipeDetailList name='Preparation Steps' content={this.state.recipe.preparationSteps} />
-                <this.Ingredient ingredients={this.state.recipe.ingredientList} />
+                <this.Ingredient ingredients={this.state.recipe.recipeIngredientList} />
             </div >
         );
     }
