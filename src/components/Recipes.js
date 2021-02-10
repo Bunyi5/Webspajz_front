@@ -14,11 +14,14 @@ export default class Recipes extends React.Component {
 
     componentDidMount() {
         fetch('http://localhost:8080/recipes', {
-            method: 'GET'
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('authorization')
+            }
         })
             .then(response => {
                 if (!response.ok) {
-                    throw Error('Error fetching profile picture!')
+                    throw Error('Error fetching presented recipes!')
                 }
                 return response.json()
             })
