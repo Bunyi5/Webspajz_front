@@ -1,0 +1,12 @@
+.all-user-ingredient-container {
+    position: relative;
+    float: left;
+    margin-right: 16px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.minus-button, .ingredient-name, .plus-button, .quantity {
+    display: inline-block;
+}

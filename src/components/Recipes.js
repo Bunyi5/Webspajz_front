@@ -18,21 +18,18 @@ export default class Recipes extends React.Component {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('authorization')
             }
+        }).then(res => {
+            if (!res.ok) {
+                throw Error('Error fetching presented recipes!')
+            }
+            return res.json();
+        }).then(responseData => {
+            this.setState({
+                presentedRecipes: responseData
+            });
+        }).catch(err => {
+            console.log(err);
         })
-            .then(response => {
-                if (!response.ok) {
-                    throw Error('Error fetching presented recipes!')
-                }
-                return response.json()
-            })
-            .then(responseData => {
-                this.setState({
-                    presentedRecipes: responseData
-                })
-            })
-            .catch(err => {
-                console.log(err)
-            })
     }
 
     render() {
