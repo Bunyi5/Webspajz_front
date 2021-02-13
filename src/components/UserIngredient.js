@@ -29,7 +29,7 @@ export default class UserIngredient extends React.Component {
             }
         }).then(res => {
             if (!res.ok) {
-                throw Error('Error fetching user ingredients!')
+                throw new Error('Error fetching user ingredients!')
             }
             return res.json();
         }).then(responseData => {

@@ -17,11 +17,11 @@ export default class RecipeDetails extends React.Component {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('authorization')
             }
-        }).then(response => {
-            if (!response.ok) {
-                throw Error('Error fetching recipe details!')
+        }).then(res => {
+            if (!res.ok) {
+                throw new Error('Error fetching recipe details!')
             }
-            return response.json()
+            return res.json()
         }).then(responseData => {
             this.setState({
                 recipe: responseData

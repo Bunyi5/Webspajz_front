@@ -20,7 +20,7 @@ export default class Recipes extends React.Component {
             }
         }).then(res => {
             if (!res.ok) {
-                throw Error('Error fetching presented recipes!')
+                throw new Error('Error fetching presented recipes!')
             }
             return res.json();
         }).then(responseData => {
