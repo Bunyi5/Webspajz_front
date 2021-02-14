@@ -68,7 +68,7 @@ export default class RecipeDetails extends React.Component {
                 if (item.quantity === 0) {
                     return <li key={item.id}>{item.ingredient.name}</li>
                 } else if (item.unit == null) {
-                    return <li key={item.id}>{item.ingredient.name + ' (' + item.quantity + ' db)'}</li>
+                    return <li key={item.id}>{item.ingredient.name + ' (' + item.quantity + ' pc.)'}</li>
                 } else {
                     return <li key={item.id}>{item.ingredient.name + ' (' + item.quantity + ' ' + item.unit + ')'}</li>
                 }

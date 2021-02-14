@@ -23,7 +23,7 @@ export default class Profile extends React.Component {
             if (res.ok) {
                 return res.json();
             } else {
-                throw Error('Error fetching username!');
+                throw new Error('Error fetching user!');
             }
         }).then(res => {
             this.setState({
@@ -43,7 +43,7 @@ export default class Profile extends React.Component {
         return (
             <div className='profile-container'>
                 <img src={this.state.profile_url} alt='.' />
-                <label className='username'>{this.state.user.username}</label>
+                <label className='full-name'>{this.state.user.firstName} {this.state.user.lastName}</label>
                 <button type='button' onClick={this.handleLogout}>
                     <span className='fa fa-sign-out fa_color'></span>
                 </button>

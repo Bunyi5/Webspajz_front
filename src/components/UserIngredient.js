@@ -122,7 +122,7 @@ export default class UserIngredient extends React.Component {
         }
 
         if (ingredient.unit === null) {
-            unit = 'db';
+            unit = 'pc.';
         } else {
             unit = ingredient.unit;
         }

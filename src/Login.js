@@ -1,98 +1,92 @@
-import React, { Component } from 'react';
+import React from 'react';
 import history from './history';
+import { useForm } from 'react-hook-form';
 
-export default class Login extends Component {
-    constructor() {
-        super();
+import './styles/Login.css'
 
-        this.state = {
-            username: '',
-            password: ''
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    }
+function handleFormSubmit(userObject) {
 
-    handleChange(event) {
-        const target = event.target;
-        const name = target.name;
-        this.setState({
-            [name]: target.value
-        });
-    }
+    fetch('http://localhost:8080/authenticate', {
+        method: 'POST',
+        body: JSON.stringify(userObject),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => {
+        if (res.ok) {
+            return res.json();
+        } else {
+            throw new Error('Incorrect username or password!');
+        }
+    }).then(res => {
+        localStorage.setItem('authorization', res.token);
+        checkAuthorization();
+    }).catch(err => {
+        alert(err);
+    })
+};
 
-    handleFormSubmit(event) {
-        event.preventDefault();
+function checkAuthorization() {
 
-        const user_object = {
-            username: this.state.username,
-            password: this.state.password
-        };
+    fetch('http://localhost:8080/tryAuth', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('authorization')
+        }
+    }).then(res => {
+        if (res.ok) {
+            history.push('/recipes');
+        } else {
+            alert('Authentication failure');
+        }
+    });
+}
 
-        fetch('http://localhost:8080/authenticate', {
-            method: 'POST',
-            body: JSON.stringify(user_object),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-            if (res.ok) {
-                return res.json();
-            } else {
-                throw new Error('Incorrect username or password!');
-            }
-        }).then(res => {
-            localStorage.setItem('authorization', res.token);
-            this.checkAuthorization();
-        }).catch(error => {
-            alert(error);
-        })
-    };
+function Form() {
+    const { register, handleSubmit, errors } = useForm({mode: 'onChange'});
+    const onSubmit = (userObject) => handleFormSubmit(userObject);
 
-    checkAuthorization() {
-        fetch('http://localhost:8080/tryAuth', {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('authorization')
-            }
-        }).then(res => res.text())
-            .then(res => {
-                if (res === 'success') {
-                    history.push('/recipes');
-                } else {
-                    alert('Authentication failure');
-                }
-            });
-    }
+    return (
+        <div>
+            <div className='wrapper'>
+                <form className='form-signin' onSubmit={handleSubmit(onSubmit)}>
+                    <h2 className='form-signin-heading'>Please login</h2>
+                    <div className='form-group'>
+                        <input type='text'
+                            name='username'
+                            className='form-control'
+                            placeholder='username'
+                            ref={register({
+                                required: 'Username is required!',
+                                pattern: { value: /^[A-Za-z0-9]+$/, message: 'Alphabetical characters and numbers only!' },
+                                maxLength: { value: 20, message: 'Username cannot exceed 20 characters!' }
+                            })}
+                        />
+                        {errors.username && (<p className='errors'>{errors.username.message}</p>)}
+                    </div>
+                    <div className='form-group'>
+                        <input type='password'
+                            name='password'
+                            className='form-control'
+                            placeholder='password'
+                            ref={register({
+                                required: 'Password is required!',
+                                maxLength: { value: 20, message: 'Password cannot exceed 20 characters!' }
+                            })}
+                        />
+                        {errors.password && (<p className='errors'>{errors.password.message}</p>)}
+                    </div>
+                    <button className='btn btn-lg btn-primary btn-block' type='submit'>Login</button>
+                </form>
+                <button className='btn btn-lg btn-primary btn-block' onClick={() => history.push('/register')}>Register</button>
+            </div>
+        </div>
+    );
+}
+
+export default class Login extends React.Component {
 
     render() {
-        return (
-            <div>
-                <div className='wrapper'>
-                    <form className='form-signin' onSubmit={this.handleFormSubmit}>
-                        <h2 className='form-signin-heading'>Please login</h2>
-                        <div className='form-group'>
-                            <input type='text'
-                                name='username'
-                                className='form-control'
-                                placeholder='Username'
-                                onChange={this.handleChange}
-                            />
-                        </div>
-                        <div className='form-group'>
-                            <input type='password'
-                                name='password'
-                                className='form-control'
-                                placeholder='password'
-                                onChange={this.handleChange}
-                            />
-                        </div>
-                        <button className='btn btn-lg btn-primary btn-block' type='submit'>
-                            Login
-            </button>
-                    </form>
-                </div>
-            </div>
-        );
+        return <Form />;
     }
 }

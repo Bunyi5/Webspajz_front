@@ -7,6 +7,7 @@ import RecipeDetails from './components/RecipeDetails';
 import NavBar from './components/NavBar';
 import history from './history';
 import UserIngredient from './components/UserIngredient';
+import Register from './Register'
 
 export default class Routes extends React.Component {
     render() {
@@ -14,6 +15,7 @@ export default class Routes extends React.Component {
             <Router history={history}>
                 <Switch>
                     <Route exact path='/' component={Login} />
+                    <Route path='/register' exact component={Register} />
                     <>
                         <NavBar />
                         <Route path='/recipes' exact component={MainPage} />
