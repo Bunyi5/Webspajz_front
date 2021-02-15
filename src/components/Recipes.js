@@ -7,9 +7,19 @@ export default class Recipes extends React.Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
-            presentedRecipes: [{}]
+            presentedRecipes: []
         }
+
+        this.completeness = {
+            GREEN: 'GREEN',
+            YELLOW: 'YELLOW',
+            RED: 'RED'
+        }
+
+        this.renderByCompleteness = this.renderByCompleteness.bind(this);
+        this.renderRecipesList = this.renderRecipesList.bind(this);
     }
 
     componentDidMount() {
@@ -32,22 +42,58 @@ export default class Recipes extends React.Component {
         })
     }
 
-    render() {
-        const recipes = this.state.presentedRecipes.map(recipes =>
-            <div className='recipe-container' key={'recipe' + recipes.id} onClick={() => history.push({
-                pathname: '/recipe/' + recipes.id,
+    renderRecipe(recipe) {
+        return (
+            <div className='recipe-container' key={'recipe' + recipe.id} onClick={() => history.push({
+                pathname: '/recipe/' + recipe.id,
                 state: {
-                    id: recipes.id
+                    id: recipe.id
                 }
             })}>
-                <img src={recipes.iconImageUrl} alt='' ></img>
-                <div className='recipe-name' >{recipes.name}</div>
+                <img src={recipe.iconImageUrl} alt='' ></img>
+                <div className='recipe-name' >{recipe.name}</div>
             </div>
-        );
+        )
+    }
+
+    renderRecipesList(completeness) {
+        return this.state.presentedRecipes
+            .filter(recipe => recipe.completeness === completeness)
+            .map(recipe => this.renderRecipe(recipe));
+    }
+
+    renderLine(list, completeness) {
+        if (list.length > 0) {
+            return <hr className={'line' + completeness}></hr>
+        }
+    }
+
+    renderByCompleteness() {
+        const greenRecipes = this.renderRecipesList(this.completeness.GREEN);
+        const yellowRecipes = this.renderRecipesList(this.completeness.YELLOW);
+        const redRecipes = this.renderRecipesList(this.completeness.RED);
+
         return (
-            <div className='recipes-container'>
-                {recipes}
+            <div>
+                <div className='recipes-container'>
+                    {this.renderLine(greenRecipes, this.completeness.GREEN)}
+                    {greenRecipes}
+                </div>
+                <div className='recipes-container'>
+                    {this.renderLine(yellowRecipes, this.completeness.YELLOW)}
+                    {yellowRecipes}
+                </div>
+                <div className='recipes-container'>
+                    {this.renderLine(redRecipes, this.completeness.RED)}
+                    {redRecipes}
+                </div>
             </div>
-        );
+        )
+    }
+
+    render() {
+        const recipes = this.renderByCompleteness();
+
+        return recipes;
     }
 }
