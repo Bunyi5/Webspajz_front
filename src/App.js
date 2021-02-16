@@ -3,13 +3,13 @@ import './App.css';
 import Routes from './Routes';
 
 class App extends React.Component {
-  render() {
-    return (
-      <div className='App'>
-        <Routes />
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className='App'>
+                <Routes/>
+            </div>
+        );
+    }
 }
 
 export default App;

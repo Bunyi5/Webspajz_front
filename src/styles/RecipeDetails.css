@@ -29,8 +29,8 @@
 .stars-outer {
     display: inline-block;
     position: relative;
-    right: 0px;
-    font-family: FontAwesome;
+    right: 0;
+    font-family: FontAwesome, serif;
 }
 
 .stars-outer::before {

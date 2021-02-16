@@ -54,7 +54,8 @@ export default class RecipeDetails extends React.Component {
                 <li key={item}>{item}</li>
             );
             return <div className='details-container'>
-                <b>{props.name}:</b> <ul>{contentList}</ul>
+                <b>{props.name}:</b>
+                <ul>{contentList}</ul>
             </div>
         } else {
             return null;
@@ -74,7 +75,8 @@ export default class RecipeDetails extends React.Component {
                 }
             });
             return <div className='details-container'>
-                <b>Ingredients:</b> <ul>{recipeIngredientList}</ul>
+                <b>Ingredients:</b>
+                <ul>{recipeIngredientList}</ul>
             </div>
         } else {
             return null;
@@ -84,22 +86,22 @@ export default class RecipeDetails extends React.Component {
     render() {
         return (
             <div className='recipe-details'>
-                <img src={this.state.recipe.resizableImageUrl} alt=''></img>
+                <img src={this.state.recipe.resizableImageUrl} alt=''/>
                 <h3 id='recipe-name'>{this.state.recipe.name}</h3>
                 <div className='review-container'>
                     <div className='stars-outer'>
-                        <div className='stars-inner'></div>
-                    </div >
+                        <div className='stars-inner'/>
+                    </div>
                     <div className='total-review'>({this.state.recipe.totalReviewCount})</div>
                 </div>
-                <this.RecipeDetail name='Description' content={this.state.recipe.description} />
-                <this.RecipeDetail name='Difficulty' content={this.state.recipe.difficultyLevel} />
-                <this.RecipeDetail name='Number of Servings' content={this.state.recipe.numberOfServings} />
-                <this.RecipeDetailList name='Technique' content={this.state.recipe.techniqueList} />
-                <this.RecipeDetailList name='Nutrition' content={this.state.recipe.nutritionList} />
-                <this.RecipeDetailList name='Preparation Steps' content={this.state.recipe.preparationSteps} />
-                <this.Ingredient ingredients={this.state.recipe.recipeIngredientList} />
-            </div >
+                <this.RecipeDetail name='Description' content={this.state.recipe.description}/>
+                <this.RecipeDetail name='Difficulty' content={this.state.recipe.difficultyLevel}/>
+                <this.RecipeDetail name='Number of Servings' content={this.state.recipe.numberOfServings}/>
+                <this.RecipeDetailList name='Technique' content={this.state.recipe.techniqueList}/>
+                <this.RecipeDetailList name='Nutrition' content={this.state.recipe.nutritionList}/>
+                <this.RecipeDetailList name='Preparation Steps' content={this.state.recipe.preparationSteps}/>
+                <this.Ingredient ingredients={this.state.recipe.recipeIngredientList}/>
+            </div>
         );
     }
 }

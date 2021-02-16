@@ -6,7 +6,7 @@
 
 .search-container input[type=text] {
     border-style: solid none solid solid;
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 10px 0 0 10px;
     padding: 6px;
     height: 41px;
     font-size: 17px;
@@ -16,7 +16,7 @@
     float: right;
     border-width: 2px;
     border-style: solid solid solid none;
-    border-radius: 0px 10px 10px 0px;
+    border-radius: 0 10px 10px 0;
     border-color: gray;
     background: #ddd;
     cursor: pointer;

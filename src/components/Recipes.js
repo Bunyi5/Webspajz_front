@@ -50,8 +50,8 @@ export default class Recipes extends React.Component {
                     id: recipe.id
                 }
             })}>
-                <img src={recipe.iconImageUrl} alt='' ></img>
-                <div className='recipe-name' >{recipe.name}</div>
+                <img src={recipe.iconImageUrl} alt=''/>
+                <div className='recipe-name'>{recipe.name}</div>
             </div>
         )
     }
@@ -64,7 +64,7 @@ export default class Recipes extends React.Component {
 
     renderLine(list, completeness) {
         if (list.length > 0) {
-            return <hr className={'line' + completeness}></hr>
+            return <hr className={'line' + completeness}/>
         }
     }
 
@@ -92,8 +92,6 @@ export default class Recipes extends React.Component {
     }
 
     render() {
-        const recipes = this.renderByCompleteness();
-
-        return recipes;
+        return this.renderByCompleteness();
     }
 }

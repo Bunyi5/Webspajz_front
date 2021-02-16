@@ -68,7 +68,7 @@ export default class UserIngredient extends React.Component {
                 } else {
                     this.quantity = ingredient.quantity - 1;
                 }
-                return { ...ingredient, quantity: this.quantity };
+                return {...ingredient, quantity: this.quantity};
             } else {
                 return ingredient;
             }
@@ -81,34 +81,30 @@ export default class UserIngredient extends React.Component {
         const needToSaveIngredients = state.needToSaveIngredients.map(ingredient => {
             if (ingredient.ingredientId === ingredientId) {
                 found = true;
-                return { ...ingredient, quantity: this.quantity };
+                return {...ingredient, quantity: this.quantity};
             } else {
                 return ingredient;
             }
         });
 
         if (!found) {
-            return [...state.needToSaveIngredients, { ingredientId: ingredientId, quantity: this.quantity }];
+            return [...state.needToSaveIngredients, {ingredientId: ingredientId, quantity: this.quantity}];
         }
 
         return needToSaveIngredients;
     }
 
-    modifyQuantitysInStates(ingredientId, sign) {
+    modifyQuantitiesInStates(ingredientId, sign) {
         this.setState(state => {
-            return { userIngredients: this.modifyUserIngredientsState(state, ingredientId, sign) };
+            return {userIngredients: this.modifyUserIngredientsState(state, ingredientId, sign)};
         }, () => this.setState(state => {
-            return { needToSaveIngredients: this.modifyNeedToSaveIngredientsState(state, ingredientId) };
+            return {needToSaveIngredients: this.modifyNeedToSaveIngredientsState(state, ingredientId)};
         }));
     }
 
-    isButtonDiabled(ingredient, sign) {
-        if ((sign === this.button.MINUS && (ingredient.quantity === null || ingredient.quantity === 0))
-            || (sign === this.button.PLUS && ingredient.quantity === 10000)) {
-            return true;
-        } else {
-            return false;
-        }
+    isButtonDisabled(ingredient, sign) {
+        return (sign === this.button.MINUS && (ingredient.quantity === null || ingredient.quantity === 0))
+            || (sign === this.button.PLUS && ingredient.quantity === 10000);
     }
 
     getQuantity(ingredient) {
@@ -135,14 +131,20 @@ export default class UserIngredient extends React.Component {
             <div className='user-ingredient-container' key={'ingredient' + ingredient.ingredientId}>
 
                 <button className='minus-button'
-                    disabled={this.isButtonDiabled(ingredient, this.button.MINUS)}
-                    onClick={() => { this.modifyQuantitysInStates(ingredient.ingredientId, this.button.MINUS) }}>-</button>
+                        disabled={this.isButtonDisabled(ingredient, this.button.MINUS)}
+                        onClick={() => {
+                            this.modifyQuantitiesInStates(ingredient.ingredientId, this.button.MINUS)
+                        }}>-
+                </button>
 
                 <div className='ingredient-name'>{ingredient.ingredientName}</div>
 
                 <button className='plus-button'
-                    disabled={this.isButtonDiabled(ingredient, this.button.PLUS)}
-                    onClick={() => { this.modifyQuantitysInStates(ingredient.ingredientId, this.button.PLUS) }}>+</button>
+                        disabled={this.isButtonDisabled(ingredient, this.button.PLUS)}
+                        onClick={() => {
+                            this.modifyQuantitiesInStates(ingredient.ingredientId, this.button.PLUS)
+                        }}>+
+                </button>
 
                 <>{this.getQuantity(ingredient)}</>
             </div>
@@ -152,7 +154,10 @@ export default class UserIngredient extends React.Component {
     render() {
         return (
             <div className='all-user-ingredient-container'>
-                <button onClick={() => { this.saveUserIngredients() }}>Save ingredients</button>
+                <button onClick={() => {
+                    this.saveUserIngredients()
+                }}>Save ingredients
+                </button>
                 {this.renderIngredients()}
             </div>
         );

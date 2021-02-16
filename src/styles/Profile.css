@@ -1,41 +1,37 @@
 .profile-container {
-	float: right;
-	margin-top: 8px;
-	margin-right: 8px;
+    float: right;
+    margin-top: 8px;
+    margin-right: 8px;
 }
 
 .profile-container img {
-	float: left;
-	border-width: 2px;
-	border-style: solid none solid solid;
-	border-radius: 10px 0px 0px 10px;
-	border-color: gray;
-	padding: 6px;
-	width: 41px;
-	height: 41px;
+    float: left;
+    border-width: 2px;
+    border-style: solid none solid solid;
+    border-radius: 10px 0 0 10px;
+    border-color: gray;
+    padding: 6px;
+    width: 41px;
+    height: 41px;
 }
 
 .profile-container label {
-	float: left;
-	border-width: 2px;
-	border-style: solid none;
-	border-color: gray;
-	width: 200px;
-	height: 41px;
-	font-size: 17px;
+    float: left;
+    border-width: 2px;
+    border-style: solid none;
+    border-color: gray;
+    width: 200px;
+    height: 41px;
+    font-size: 17px;
 }
 
 .profile-container button {
-	float: right;
-	border-style: solid solid solid none;
-	border-radius: 0px 10px 10px 0px;
-	background: #ddd;
-	cursor: pointer;
-	width: 41px;
-	height: 41px;
-	font-size: 17px;
-}
-
-.fa_color {
-	color: black;
+    float: right;
+    border-style: solid solid solid none;
+    border-radius: 0 10px 10px 0;
+    background: #ddd;
+    cursor: pointer;
+    width: 41px;
+    height: 41px;
+    font-size: 17px;
 }

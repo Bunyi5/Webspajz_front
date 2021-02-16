@@ -42,10 +42,10 @@ export default class Profile extends React.Component {
     render() {
         return (
             <div className='profile-container'>
-                <img src={this.state.profile_url} alt='.' />
+                <img src={this.state.profile_url} alt='.'/>
                 <label className='full-name'>{this.state.user.firstName} {this.state.user.lastName}</label>
                 <button type='button' onClick={this.handleLogout}>
-                    <span className='fa fa-sign-out fa_color'></span>
+                    <span className='fa fa-sign-out fa_color'/>
                 </button>
             </div>
         );
