@@ -2,6 +2,7 @@ import React from 'react';
 import history from '../history'
 
 import '../styles/Recipes.css'
+import SearchBar from "./SearchBar";
 
 export default class Recipes extends React.Component {
 
@@ -9,7 +10,8 @@ export default class Recipes extends React.Component {
         super(props);
 
         this.state = {
-            presentedRecipes: []
+            presentedRecipes: [],
+            filterByName: ''
         }
 
         this.completeness = {
@@ -20,6 +22,7 @@ export default class Recipes extends React.Component {
 
         this.renderByCompleteness = this.renderByCompleteness.bind(this);
         this.renderRecipesList = this.renderRecipesList.bind(this);
+        this.updateFilter = this.updateFilter.bind(this);
     }
 
     componentDidMount() {
@@ -42,6 +45,12 @@ export default class Recipes extends React.Component {
         })
     }
 
+    updateFilter(filterByName) {
+        this.setState({
+            filterByName: filterByName
+        })
+    }
+
     renderRecipe(recipe) {
         return (
             <div className='recipe-container' key={'recipe' + recipe.id} onClick={() => history.push({
@@ -50,42 +59,27 @@ export default class Recipes extends React.Component {
                     id: recipe.id
                 }
             })}>
+                <span className={'dot ' + recipe.completeness}/>
                 <img src={recipe.iconImageUrl} alt=''/>
                 <div className='recipe-name'>{recipe.name}</div>
             </div>
         )
     }
 
-    renderRecipesList(completeness) {
+    renderRecipesList() {
         return this.state.presentedRecipes
-            .filter(recipe => recipe.completeness === completeness)
+            .filter(recipe => recipe.name.toLowerCase().includes(this.state.filterByName))
             .map(recipe => this.renderRecipe(recipe));
     }
 
-    renderLine(list, completeness) {
-        if (list.length > 0) {
-            return <hr className={'line' + completeness}/>
-        }
-    }
-
     renderByCompleteness() {
-        const greenRecipes = this.renderRecipesList(this.completeness.GREEN);
-        const yellowRecipes = this.renderRecipesList(this.completeness.YELLOW);
-        const redRecipes = this.renderRecipesList(this.completeness.RED);
+        const recipes = this.renderRecipesList();
 
         return (
             <div>
+                <SearchBar filterMethod={this.updateFilter}/>
                 <div className='recipes-container'>
-                    {this.renderLine(greenRecipes, this.completeness.GREEN)}
-                    {greenRecipes}
-                </div>
-                <div className='recipes-container'>
-                    {this.renderLine(yellowRecipes, this.completeness.YELLOW)}
-                    {yellowRecipes}
-                </div>
-                <div className='recipes-container'>
-                    {this.renderLine(redRecipes, this.completeness.RED)}
-                    {redRecipes}
+                    {recipes}
                 </div>
             </div>
         )
