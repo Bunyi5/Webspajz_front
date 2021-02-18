@@ -1,37 +1,16 @@
-.profile-container {
-    float: right;
-    margin-top: 8px;
-    margin-right: 8px;
+.d-flex button {
+    width: 40px;
+    background-color: #d9b686;
+    border: none;
+    border-radius: 1rem;
+    color: white;
 }
 
-.profile-container img {
-    float: left;
-    border-width: 2px;
-    border-style: solid none solid solid;
-    border-radius: 10px 0 0 10px;
-    border-color: gray;
-    padding: 6px;
-    width: 41px;
-    height: 41px;
+.d-flex button:hover {
+    width: 40px;
+    background-color: #bd8843;
 }
 
-.profile-container label {
-    float: left;
-    border-width: 2px;
-    border-style: solid none;
-    border-color: gray;
-    width: 200px;
-    height: 41px;
-    font-size: 17px;
-}
-
-.profile-container button {
-    float: right;
-    border-style: solid solid solid none;
-    border-radius: 0 10px 10px 0;
-    background: #ddd;
-    cursor: pointer;
-    width: 41px;
-    height: 41px;
-    font-size: 17px;
+.d-flex button:focus {
+    box-shadow: 0 0 0 0.25rem #d9b68625;
 }

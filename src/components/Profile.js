@@ -1,15 +1,14 @@
 import React from 'react';
-import history from '../../history';
+import history from '../history';
 
-import '../../styles/Profile.css'
+import '../styles/Profile.css'
 
 export default class Profile extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            user: {},
-            profile_url: 'https://cdn4.iconfinder.com/data/icons/basic-user-interface-elements/700/user-account-profile-human-avatar-face-head--512.png'
+            user: {}
         };
     }
 
@@ -41,10 +40,9 @@ export default class Profile extends React.Component {
 
     render() {
         return (
-            <div className='profile-container'>
-                <img src={this.state.profile_url} alt='.'/>
-                <label className='full-name'>{this.state.user.firstName} {this.state.user.lastName}</label>
-                <button type='button' onClick={this.handleLogout}>
+            <div className='d-flex'>
+                <label className='p-2 text-white-50'>{this.state.user.firstName} {this.state.user.lastName}</label>
+                <button className='btn btn-sm' type='button' onClick={this.handleLogout}>
                     <span className='fa fa-sign-out fa_color'/>
                 </button>
             </div>
