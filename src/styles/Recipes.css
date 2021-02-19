@@ -56,3 +56,21 @@
     top: 5px;
     border: solid var(--main-brown);
 }
+
+.present-dot {
+    height: 40px;
+    border-radius: 1rem;
+    display: inline-block;
+    float: left;
+    padding: 6px;
+    border-color: var(--main-brown);
+    color: var(--main-dark-brown);
+    border-style: solid;
+    margin-right: 10px;
+}
+
+.dot-container {
+    margin-left: 15px;
+    margin-top: 15px;
+    position: absolute;
+}

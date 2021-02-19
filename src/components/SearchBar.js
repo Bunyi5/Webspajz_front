@@ -7,7 +7,12 @@ const SearchBar = ({filterMethod}) => {
 
     function clearSearchField() {
         document.getElementById('search-field').value = '';
+        document.getElementById('search_button').hidden = true;
         filterMethod('');
+    }
+
+    function setToVisible() {
+        document.getElementById('search_button').hidden = (document.getElementById('search-field').value === '');
     }
 
     return (
@@ -16,12 +21,16 @@ const SearchBar = ({filterMethod}) => {
                 <Form.Label srOnly>Search</Form.Label>
                 <Form.Control type='text'
                               placeholder='Search...'
-                              onChange={event => filterMethod(event.target.value)}
+                              onChange={event => {
+                                  filterMethod(event.target.value)
+                                  setToVisible()
+                              }}
                 />
             </Form.Group>
             <button id='search_button' type='button'
                     className='btn btn-sm'
                     onClick={clearSearchField}
+                    hidden={true}
             >
                 <i className='fa fa-times'/>
             </button>

@@ -14,14 +14,6 @@ export default class Recipes extends React.Component {
             filterByName: ''
         }
 
-        this.completeness = {
-            GREEN: 'GREEN',
-            YELLOW: 'YELLOW',
-            RED: 'RED'
-        }
-
-        this.renderByCompleteness = this.renderByCompleteness.bind(this);
-        this.renderRecipesList = this.renderRecipesList.bind(this);
         this.updateFilter = this.updateFilter.bind(this);
     }
 
@@ -60,7 +52,7 @@ export default class Recipes extends React.Component {
                 }
             })}>
                 <span className={'dot ' + recipe.completeness}/>
-                <img src={recipe.iconImageUrl} alt=''/>
+                <img src={recipe.iconImageUrl} alt='recipe_picture'/>
                 <div className='recipe-name'>{recipe.name}</div>
             </div>
         )
@@ -72,20 +64,19 @@ export default class Recipes extends React.Component {
             .map(recipe => this.renderRecipe(recipe));
     }
 
-    renderByCompleteness() {
-        const recipes = this.renderRecipesList();
-
+    render() {
         return (
             <div>
+                <div className='dot-container'>
+                    <div className='present-dot GREEN'>Makeable</div>
+                    <div className='present-dot YELLOW'>Almost makeable</div>
+                    <div className='present-dot RED'>Not makeable</div>
+                </div>
                 <SearchBar filterMethod={this.updateFilter}/>
                 <div className='recipes-container'>
-                    {recipes}
+                    {this.renderRecipesList()}
                 </div>
             </div>
-        )
-    }
-
-    render() {
-        return this.renderByCompleteness();
+        );
     }
 }

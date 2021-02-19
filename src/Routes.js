@@ -15,10 +15,10 @@ export default class Routes extends React.Component {
             <Router history={history}>
                 <Switch>
                     <Route exact path='/' component={Login}/>
-                    <Route path='/register' exact component={Register}/>
+                    <Route path='/register' component={Register}/>
                     <>
                         <NavBar/>
-                        <Route path='/recipes' exact component={Recipes}/>
+                        <Route path='/recipes' component={Recipes}/>
                         <Route path='/recipe/:id' component={RecipeDetails}/>
                         <Route path='/userIngredient' component={UserIngredient}/>
                     </>
