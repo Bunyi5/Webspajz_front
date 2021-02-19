@@ -32,8 +32,8 @@ export default class Recipes extends React.Component {
             this.setState({
                 presentedRecipes: responseData
             });
-        }).catch(err => {
-            console.log(err);
+        }).catch(() => {
+            history.push('/error');
         })
     }
 

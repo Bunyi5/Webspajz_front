@@ -1,4 +1,5 @@
 import React from 'react';
+import history from "../history";
 
 import '../styles/RecipeDetails.css'
 
@@ -28,8 +29,8 @@ export default class RecipeDetails extends React.Component {
             })
         }).then(() => {
             this.setStarPercentage()
-        }).catch(err => {
-            console.log(err)
+        }).catch(() => {
+            history.push('/error');
         })
     }
 

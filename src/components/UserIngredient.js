@@ -42,8 +42,8 @@ export default class UserIngredient extends React.Component {
             this.setState({
                 userIngredients: responseData
             });
-        }).catch(err => {
-            console.log(err);
+        }).catch(() => {
+            history.push('/error');
         })
     }
 

@@ -1,0 +1,16 @@
+.error-page {
+    font-size: 25px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--main-brown);
+}
+
+.error-page a {
+    color: var(--main-white55);
+}
+
+.error-page a:hover {
+    color: var(--main-white75);
+}

@@ -22,8 +22,8 @@ function handleFormSubmit(userObject) {
     }).then(res => {
         localStorage.setItem('authorization', res.token);
         checkAuthorization();
-    }).catch(err => {
-        alert(err);
+    }).catch(() => {
+        alert('Server is not reachable!');
     })
 }
 
