@@ -10,22 +10,22 @@
     float: left;
     margin-right: 16px;
     margin-bottom: 30px;
-    border: solid #734810;
+    border: solid var(--main-brown);
     cursor: pointer;
     width: 360px;
     height: 288px;
 }
 
 .recipe-container:hover .recipe-name {
-    color: rgba(255,255,255,.75);
+    color: var(--main-white75);
 }
 
 .recipe-name {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #734810;
-    color: rgba(255,255,255,.55);
+    background-color: var(--main-brown);
+    color: var(--main-white55);
     width: 355px;
     height: 48px;
 }
@@ -54,5 +54,5 @@
     margin-left: auto;
     right: 5px;
     top: 5px;
-    border: solid #734810;
+    border: solid var(--main-brown);
 }

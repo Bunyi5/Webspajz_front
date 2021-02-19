@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router} from 'react-router-dom';
 
 import './index.css';
+import './styles/MainColors.css'
 
 ReactDOM.render(
     <Router>
