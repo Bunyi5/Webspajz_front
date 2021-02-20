@@ -13,25 +13,29 @@ export default class RecipeDetails extends React.Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:8080/recipe/' + this.props.location.state.id, {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('authorization')
-            }
-        }).then(res => {
-            if (!res.ok) {
-                throw new Error('Error fetching recipe details!')
-            }
-            return res.json()
-        }).then(responseData => {
-            this.setState({
-                recipe: responseData
+        if (this.props.location.state !== undefined) {
+            fetch('http://localhost:8080/recipe/' + this.props.location.state.id, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('authorization')
+                }
+            }).then(res => {
+                if (!res.ok) {
+                    throw new Error('Error fetching recipe details!')
+                }
+                return res.json()
+            }).then(responseData => {
+                this.setState({
+                    recipe: responseData
+                })
+            }).then(() => {
+                this.setStarPercentage()
+            }).catch(() => {
+                history.push('/error');
             })
-        }).then(() => {
-            this.setStarPercentage()
-        }).catch(() => {
+        } else {
             history.push('/error');
-        })
+        }
     }
 
     setStarPercentage() {
@@ -42,7 +46,8 @@ export default class RecipeDetails extends React.Component {
     RecipeDetail(props) {
         if (props.content != null) {
             return <div className='details-container'>
-                <b>{props.name}:</b> {props.content}
+                <b>{props.name}</b>
+                <div> {props.content} </div>
             </div>
         } else {
             return null;
@@ -55,7 +60,7 @@ export default class RecipeDetails extends React.Component {
                 <li key={item}>{item}</li>
             );
             return <div className='details-container'>
-                <b>{props.name}:</b>
+                <b>{props.name}</b>
                 <ul>{contentList}</ul>
             </div>
         } else {
@@ -86,22 +91,24 @@ export default class RecipeDetails extends React.Component {
 
     render() {
         return (
-            <div className='recipe-details'>
-                <img src={this.state.recipe.resizableImageUrl} alt=''/>
-                <h3 id='recipe-name'>{this.state.recipe.name}</h3>
-                <div className='review-container'>
-                    <div className='stars-outer'>
-                        <div className='stars-inner'/>
+            <div className='recipe'>
+                <div className='recipe-detail'>
+                    <img src={this.state.recipe.resizableImageUrl} alt=''/>
+                    <div id='recipe-name'>{this.state.recipe.name}</div>
+                    <div className='review-container'>
+                        <div className='stars-outer'>
+                            <div className='stars-inner'/>
+                        </div>
+                        <div className='total-review'>({this.state.recipe.totalReviewCount})</div>
                     </div>
-                    <div className='total-review'>({this.state.recipe.totalReviewCount})</div>
+                    <this.RecipeDetail name='Description:' content={this.state.recipe.description}/>
+                    <this.RecipeDetail name='Difficulty:' content={this.state.recipe.difficultyLevel}/>
+                    <this.RecipeDetail name='Number of Servings:' content={this.state.recipe.numberOfServings}/>
+                    <this.RecipeDetailList name='Technique:' content={this.state.recipe.techniqueList}/>
+                    <this.Ingredient ingredients={this.state.recipe.recipeIngredientList}/>
+                    <this.RecipeDetailList name='Preparation Steps:' content={this.state.recipe.preparationSteps}/>
+                    <this.RecipeDetailList name='Nutrition:' content={this.state.recipe.nutritionList}/>
                 </div>
-                <this.RecipeDetail name='Description' content={this.state.recipe.description}/>
-                <this.RecipeDetail name='Difficulty' content={this.state.recipe.difficultyLevel}/>
-                <this.RecipeDetail name='Number of Servings' content={this.state.recipe.numberOfServings}/>
-                <this.RecipeDetailList name='Technique' content={this.state.recipe.techniqueList}/>
-                <this.RecipeDetailList name='Nutrition' content={this.state.recipe.nutritionList}/>
-                <this.RecipeDetailList name='Preparation Steps' content={this.state.recipe.preparationSteps}/>
-                <this.Ingredient ingredients={this.state.recipe.recipeIngredientList}/>
             </div>
         );
     }
