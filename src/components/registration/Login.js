@@ -22,8 +22,12 @@ function handleFormSubmit(userObject) {
     }).then(res => {
         localStorage.setItem('authorization', res.token);
         checkAuthorization();
-    }).catch(() => {
-        alert('Server is not reachable!');
+    }).catch(err => {
+        if (err.constructor === TypeError) {
+            alert('Server is not reachable!');
+        } else {
+            alert(err);
+        }
     })
 }
 
