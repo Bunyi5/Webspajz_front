@@ -3,7 +3,7 @@ import history from '../../history';
 import {Form} from "react-bootstrap";
 import {useForm} from 'react-hook-form';
 
-import '../../styles/Registartion.css'
+import '../../styles/Registration.css'
 
 function handleFormSubmit(userObject) {
 
