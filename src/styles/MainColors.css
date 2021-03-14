@@ -1,0 +1,10 @@
+:root {
+    --main-light-brown: #D9B686;
+    --main-light-brown25: #D9B68625;
+    --main-brown: #8E5C1B;
+    --main-brown50: #8E5C1B50;
+    --main-dark-brown: #734810;
+    --main-middle-brown: #BD8843;
+    --main-white55: rgba(255,255,255,.55);
+    --main-white75: rgba(255,255,255,.75);
+}

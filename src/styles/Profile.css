@@ -1,0 +1,20 @@
+.d-flex button {
+    width: 40px;
+    background-color: var(--main-light-brown);
+    border: none;
+    border-radius: 1rem;
+    color: white;
+}
+
+.d-flex button:hover {
+    width: 40px;
+    background-color: var(--main-middle-brown);
+}
+
+.d-flex button:focus {
+    box-shadow: 0 0 0 0.25rem var(--main-light-brown25);
+}
+
+.d-flex label {
+    margin-right: 10px;
+}
